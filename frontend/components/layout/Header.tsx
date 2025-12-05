@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navItems = [
@@ -17,38 +18,43 @@ export const Header: React.FC = () => {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-6">
-      <div className="flex items-center gap-8">
-        <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-white shadow-soft">
+    <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-4 lg:px-6">
+      <div className="flex items-center gap-6">
+        <Link href="/" className="flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white shadow">
             S
           </div>
-          <span className="text-lg font-semibold">SkillOnBoard</span>
-        </div>
+          <span className="text-lg font-semibold text-slate-900">
+            SkillOnBoard
+          </span>
+        </Link>
+
         <nav className="hidden items-center gap-2 md:flex">
           {navItems.map((item) => {
-            const active = item.href === "/" ? pathname === "/" : false;
+            const active = pathname === item.href;
             return (
-              <button
+              <Link
                 key={item.href}
+                href={item.href}
                 className={
-                  "flex items-center gap-1 rounded-full px-3 py-1 text-xs " +
+                  "rounded-full px-3 py-1 text-xs transition " +
                   (active
-                    ? "bg-primary-soft text-primary font-semibold"
+                    ? "bg-blue-50 text-blue-600 font-semibold"
                     : "text-slate-500 hover:bg-slate-100")
                 }
               >
                 {item.label}
-              </button>
+              </Link>
             );
           })}
         </nav>
       </div>
+
       <div className="flex items-center gap-3">
         <button className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500">
           🔔
         </button>
-        <div className="flex h-8 w-8 items-center justify-center rounded-full border border-primary-light bg-primary-soft text-sm font-semibold text-primary">
+        <div className="flex h-8 w-8 items-center justify-center rounded-full border border-blue-200 bg-blue-50 text-sm font-semibold text-blue-600">
           A
         </div>
       </div>

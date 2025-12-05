@@ -1,5 +1,11 @@
-import "./../styles/globals.css";
 import type { Metadata } from "next";
+import "./globals.css";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "SkillOnBoard — панель стажёра",
@@ -13,7 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru">
-      <body className="min-h-screen">{children}</body>
+      <body className={`${inter.className} min-h-screen bg-slate-100`}>
+        {children}
+      </body>
     </html>
   );
 }
